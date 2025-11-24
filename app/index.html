@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZKONTROL - Private Chat</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/Symbol-purple.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/Symbol-purple.png">
+    <link rel="shortcut icon" href="../assets/logos/Symbol-purple.png" type="image/x-icon">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <img src="../assets/logos/Symbol-purple.png" alt="ZKONTROL" class="loading-logo">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Initializing Secure Connection...</p>
+        </div>
+    </div>
+
+    <!-- Matrix Background -->
+    <canvas id="matrixCanvas" class="matrix-background"></canvas>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <img src="../logo.png" alt="ZKONTROL" class="app-logo">
+                <div class="app-title-wrapper">
+                    <span class="app-title">Zkontrol</span>
+                    <span class="beta-badge">BETA</span>
+                    <span class="version-badge">v2.1.0</span>
+                </div>
+            </div>
+            <nav class="app-nav" id="mobileNav">
+                <a href="/" class="nav-link" data-page="home">Home</a>
+                <a href="/app/" class="nav-link active" data-page="chat">Chat</a>
+                <a href="#" class="nav-link" data-page="swap" id="swapBtn">Private Swap</a>
+                <a href="#" class="nav-link" data-page="wallet" id="walletBtn">My Wallet</a>
+            </nav>
+            <div class="header-right">
+                <div class="network-status" title="Network Status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Solana</span>
+                </div>
+                <button class="updates-btn" id="updatesBtn" title="What's New">
+                    🔔
+                    <span class="update-badge">3</span>
+                </button>
+                <button class="search-messages-btn" id="searchMessagesBtn" title="Search Messages">
+                    🔍
+                </button>
+                <button class="connect-wallet-btn" id="connectWalletBtn" onclick="connectPhantomWallet()" style="display: block;">
+                    🔗 Connect Wallet
+                </button>
+                <div class="wallet-connected" id="walletConnected" style="display: none;">
+                    <div class="wallet-info">
+                        <span class="wallet-icon">👛</span>
+                        <span class="wallet-address" id="walletAddressDisplay"></span>
+                    </div>
+                    <button class="disconnect-btn" onclick="disconnectPhantomWallet()" title="Disconnect">
+                        ✕
+                    </button>
+                </div>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+        </header>
+
+        <div class="app-body">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <input type="text" class="search-input" placeholder="🔍 Search conversations...">
+                </div>
+                
+                <button class="new-conversation-btn" id="newConversationBtn">
+                    💬 Private Conversation
+                </button>
+
+                <div class="conversations-list" id="conversationsList">
+                    <div class="empty-state">
+                        <div class="empty-icon">💬</div>
+                        <p class="empty-title">No conversations yet</p>
+                        <p class="empty-subtitle">Start a new conversation to begin messaging.</p>
+                        <button class="new-conversation-btn-small" id="newConversationBtnSmall">
+                            💬 Private Conversation
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Chat Area -->
+            <main class="chat-main">
+                <div class="chat-empty-state" id="chatEmptyState">
+                    <div class="empty-chat-icon">💬</div>
+                    <h2>Start a Conversation</h2>
+                    <p>Select an existing conversation from the sidebar or start a new one.</p>
+                    
+                    <button class="create-group-btn">
+                        👥 Create Group Chat
+                    </button>
+
+                    <div class="how-to-steps">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h3>Start a Conversation</h3>
+                            <p>Enter a wallet address to start a new conversation or select an existing one.</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h3>Use Commands</h3>
+                            <p>Type /help to access special commands for crypto price checks, news, and more.</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h3>Send Crypto</h3>
+                            <p>Easily send cryptocurrency to your contacts with the built-in transfer feature.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-active" id="chatActive" style="display: none;">
+                    <div class="chat-header">
+                        <div class="chat-contact-info">
+                            <div class="contact-avatar">👤</div>
+                            <div class="contact-details">
+                                <div class="contact-name" id="contactName">Anonymous User</div>
+                                <div class="contact-address" id="contactAddress">0x0000...0000</div>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <div class="protected-badge">
+                                <span class="shield-icon">🛡️</span>
+                                <span class="protected-text">Protected by ZKONTROL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="messages-container" id="messagesContainer">
+                        <!-- Messages will be added here dynamically -->
+                    </div>
+
+                    <div class="chat-input-container">
+                        <button class="attachment-btn">📎</button>
+                        <input type="text" class="message-input" id="messageInput" placeholder="Type your message...">
+                        <div class="timer-selector-wrapper">
+                            <button class="timer-btn" id="timerBtn" title="Auto-delete timer">
+                                ⏱️
+                                <span class="timer-label" id="timerLabel">Off</span>
+                            </button>
+                            <div class="timer-dropdown" id="timerDropdown">
+                                <div class="timer-option" data-seconds="0">
+                                    <span class="timer-icon">♾️</span>
+                                    <span class="timer-text">Never Delete</span>
+                                </div>
+                                <div class="timer-option" data-seconds="30">
+                                    <span class="timer-icon">⚡</span>
+                                    <span class="timer-text">30 seconds</span>
+                                </div>
+                                <div class="timer-option" data-seconds="60">
+                                    <span class="timer-icon">🕐</span>
+                                    <span class="timer-text">1 minute</span>
+                                </div>
+                                <div class="timer-option" data-seconds="300">
+                                    <span class="timer-icon">🕔</span>
+                                    <span class="timer-text">5 minutes</span>
+                                </div>
+                                <div class="timer-option" data-seconds="3600">
+                                    <span class="timer-icon">🕐</span>
+                                    <span class="timer-text">1 hour</span>
+                                </div>
+                                <div class="timer-option" data-seconds="86400">
+                                    <span class="timer-icon">📅</span>
+                                    <span class="timer-text">24 hours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="send-btn" id="sendBtn">Send</button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar - AI Features -->
+            <aside class="right-sidebar">
+                <h3 class="sidebar-title">AI Features</h3>
+                
+                <div class="feature-card ai-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">🤖</div>
+                        <span class="feature-badge new-badge">NEW</span>
+                    </div>
+                    <h4>AI Assistant</h4>
+                    <p class="feature-subtitle">Powered by ZKONTROL AI</p>
+                    <p class="feature-description">Get instant help with crypto transactions, market analysis, and smart contract interactions on Solana.</p>
+                    
+                    <!-- AI Chat Container -->
+                    <div class="ai-chat-container" id="aiChatContainer">
+                        <div class="ai-messages" id="aiMessages">
+                            <div class="ai-welcome-message">
+                                <div class="ai-message ai-bot">
+                                    <div class="ai-message-content">👋 Hi! I'm ZKONTROL AI Assistant. Ask me anything about crypto, Solana, DeFi, or NFTs!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-input-container">
+                            <input type="text" class="ai-input" id="aiInput" placeholder="Ask about crypto, Solana, DeFi...">
+                            <button class="ai-send-btn" id="aiSendBtn">🚀</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-card storage-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">🗄️</div>
+                        <span class="feature-badge coming-soon-badge">SOON</span>
+                    </div>
+                    <h4>Filecoin Storage</h4>
+                    <div class="storage-status">
+                        <span class="status-dot connected"></span>
+                        <span>Connected</span>
+                    </div>
+                    <p class="storage-info">Encrypted Storage</p>
+                    <p class="feature-description">Store and share files securely using decentralized Filecoin storage.</p>
+                    <button class="feature-btn coming-soon">⏰ Coming Soon</button>
+                </div>
+
+                <div class="feature-card privacy-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">🔐</div>
+                        <span class="feature-badge active-badge">ACTIVE</span>
+                    </div>
+                    <h4>Privacy Shield</h4>
+                    <p class="feature-description">End-to-end encryption with zero-knowledge architecture ensures your conversations remain private.</p>
+                    <div class="privacy-features">
+                        <div class="privacy-item">✓ E2E Encryption</div>
+                        <div class="privacy-item">✓ Zero-Knowledge</div>
+                        <div class="privacy-item">✓ Self-Destructing Messages</div>
+                    </div>
+                </div>
+                
+                <!-- Tech Stack Indicator -->
+                <div class="tech-stack-card">
+                    <h4>Powered By</h4>
+                    <div class="tech-badges">
+                        <span class="tech-badge">⚡ Solana</span>
+                        <span class="tech-badge">🔗 WebSocket</span>
+                        <span class="tech-badge">🗄️ PostgreSQL</span>
+                        <span class="tech-badge">🤖 AI/ML</span>
+                        <span class="tech-badge">🔐 E2EE</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- New Conversation Modal -->
+        <div class="modal" id="newConversationModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="../logo.png" alt="ZKONTROL" class="modal-logo">
+                    <h3>Start Private Conversation</h3>
+                    <button class="modal-close" id="modalClose">×</button>
+                </div>
+                <div class="modal-body">
+                    <label for="recipientAddress">Recipient Wallet Address</label>
+                    <input type="text" id="recipientAddress" class="modal-input" placeholder="Enter Solana wallet address...">
+                    <p class="modal-hint">Enter the wallet address of a user who has connected to ZKONTROL</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn cancel" id="modalCancel">Cancel</button>
+                    <button class="modal-btn primary" id="modalStart">Start Chat</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Group Chat Modal -->
+        <div class="modal" id="groupChatModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="../logo.png" alt="ZKONTROL" class="modal-logo">
+                    <h3>Create Group Chat</h3>
+                    <button class="modal-close" id="groupModalClose">×</button>
+                </div>
+                <div class="modal-body">
+                    <label for="groupChatName">Group Name</label>
+                    <input type="text" id="groupChatName" class="modal-input" placeholder="Enter group chat name...">
+                    <p class="modal-hint">Choose a name for your encrypted group chat</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn cancel" id="groupModalCancel">Cancel</button>
+                    <button class="modal-btn primary" id="groupModalCreate">Create Group</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coming Soon Modal -->
+        <div class="modal" id="comingSoonModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="../logo.png" alt="ZKONTROL" class="modal-logo">
+                    <h3 id="comingSoonTitle">Coming Soon</h3>
+                    <button class="modal-close" id="comingSoonClose">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="coming-soon-icon">🚀</div>
+                    <p id="comingSoonMessage" class="coming-soon-text">This feature is coming soon!</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn primary" id="comingSoonOk">Got it</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Private Swap Modal -->
+        <div class="modal swap-modal" id="swapModal">
+            <div class="modal-content swap-content">
+                <div class="modal-header">
+                    <img src="../logo.png" alt="ZKONTROL" class="modal-logo">
+                    <h3>💱 Private Swap</h3>
+                    <button class="modal-close" id="swapModalClose">×</button>
+                </div>
+                <div class="modal-body swap-body">
+                    <div class="swap-main">
+                        <!-- From Token Section -->
+                        <div class="swap-section-box">
+                            <div class="swap-section-label">From</div>
+                            <div class="swap-input-line">
+                                <input type="number" id="swapFromAmount" class="swap-amount" placeholder="0" min="0" step="0.01">
+                                <button class="token-selector" id="swapFromToken">
+                                    <img src="../assets/tokens/sol.png" alt="SOL" class="token-icon">
+                                    <span class="token-info">
+                                        <span class="token-symbol">SOL</span>
+                                        <span class="network-name">Solana</span>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="balance-row">Balance: <span id="solBalance">10.50</span> SOL</div>
+                        </div>
+
+                        <!-- Swap Flip Button -->
+                        <button class="swap-flip" id="swapDirectionBtn">⇅</button>
+
+                        <!-- To Token Section -->
+                        <div class="swap-section-box">
+                            <div class="swap-section-label">To</div>
+                            <div class="swap-input-line">
+                                <input type="number" id="swapToAmount" class="swap-amount" placeholder="0" readonly>
+                                <button class="token-selector" id="swapToToken">
+                                    <img src="../assets/tokens/usdc.png" alt="USDC" class="token-icon">
+                                    <span class="token-info">
+                                        <span class="token-symbol">USDC</span>
+                                        <span class="network-name">Solana</span>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="balance-row">Balance: <span id="usdcBalance">542.30</span> USDC</div>
+                        </div>
+
+                        <!-- Receiving Wallet -->
+                        <div class="swap-section-box">
+                            <div class="swap-section-label">Receiving Wallet Address</div>
+                            <input type="text" class="swap-wallet-input" placeholder="Enter wallet address (optional)">
+                        </div>
+
+                        <!-- Swap Details -->
+                        <div class="swap-details-grid">
+                            <div class="detail">
+                                <div class="detail-label">Exchange Rate</div>
+                                <div class="detail-val" id="exchangeRate">1 SOL = 142.50 USDC</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Price Impact</div>
+                                <div class="detail-val good">0.12%</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Network Fee</div>
+                                <div class="detail-val">0.00025 SOL</div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-label">Slippage</div>
+                                <div class="detail-val">0.5%</div>
+                            </div>
+                        </div>
+
+                        <!-- Privacy Badge -->
+                        <div class="privacy-shield">
+                            <span>🛡️ Zero-Knowledge Routing</span>
+                        </div>
+
+                        <!-- Execute Button -->
+                        <button class="swap-execute" id="swapExecuteBtn">Execute Private Swap</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wallet Dashboard Modal -->
+        <div class="modal wallet-modal" id="walletDashboardModal">
+            <div class="modal-content wallet-dashboard">
+                <div class="modal-header">
+                    <img src="../logo.png" alt="ZKONTROL" class="modal-logo">
+                    <h3>💼 My Wallet Dashboard</h3>
+                    <button class="modal-close" id="walletDashboardClose">×</button>
+                </div>
+                <div class="modal-body wallet-body">
+                    <!-- Wallet Address Card -->
+                    <div class="wallet-address-card">
+                        <div class="wallet-address-label">Connected Wallet</div>
+                        <div class="wallet-address-value" id="dashboardWalletAddress">Not Connected</div>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="wallet-stats-grid">
+                        <!-- Messages Sent Card -->
+                        <div class="stat-card">
+                            <div class="stat-icon">💬</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Messages Sent</div>
+                                <div class="stat-value" id="statMessagesSent">0</div>
+                            </div>
+                            <div class="stat-chart">
+                                <div class="chart-bar" style="--height: 60%"></div>
+                                <div class="chart-bar" style="--height: 75%"></div>
+                                <div class="chart-bar" style="--height: 85%"></div>
+                                <div class="chart-bar" style="--height: 100%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Active Conversations Card -->
+                        <div class="stat-card">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Conversations</div>
+                                <div class="stat-value" id="statConversations">0</div>
+                            </div>
+                            <div class="stat-chart">
+                                <div class="chart-bar" style="--height: 40%"></div>
+                                <div class="chart-bar" style="--height: 55%"></div>
+                                <div class="chart-bar" style="--height: 70%"></div>
+                                <div class="chart-bar" style="--height: 80%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Security Score Card -->
+                        <div class="stat-card">
+                            <div class="stat-icon">🛡️</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Security Score</div>
+                                <div class="stat-value">98<span class="stat-unit">%</span></div>
+                            </div>
+                            <div class="security-ring">
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle cx="40" cy="40" r="35" fill="none" stroke="#1a1a2e" stroke-width="8"/>
+                                    <circle cx="40" cy="40" r="35" fill="none" stroke="url(#gradient)" stroke-width="8" stroke-dasharray="220" stroke-dashoffset="4.4" stroke-linecap="round" class="progress-ring"/>
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="security-percentage">98%</div>
+                            </div>
+                        </div>
+
+                        <!-- Network Activity Card -->
+                        <div class="stat-card">
+                            <div class="stat-icon">📡</div>
+                            <div class="stat-content">
+                                <div class="stat-label">Network Activity</div>
+                                <div class="stat-value" id="statNetworkActivity">Active</div>
+                            </div>
+                            <div class="activity-indicator">
+                                <div class="pulse-ring"></div>
+                                <div class="pulse-ring delay-1"></div>
+                                <div class="pulse-ring delay-2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Chart -->
+                    <div class="activity-chart-card">
+                        <h4 class="chart-title">7-Day Activity</h4>
+                        <div class="activity-chart">
+                            <div class="activity-bar" style="--bar-height: 35%">
+                                <div class="bar-fill"></div>
+                                <div class="bar-label">Mon</div>
+                            </div>
+                            <div class="activity-bar" style="--bar-height: 55%">
+                                <div class="bar-fill"></div>
+                                <div class="bar-label">Tue</div>
+                            </div>
+                            <div class="activity-bar" style="--bar-height: 45%">
+                                <div class="bar-fill"></div>
+                                <div class="bar-label">Wed</div>
+                            </div>
+                            <div class="activity-bar" style="--bar-height: 70%">
+                                <div class="bar-fill"></div>
+                                <div class="bar-label">Thu</div>
+                            </div>
+                            <div class="activity-bar" style="--bar-height: 85%">
+                                <div class="bar-fill"></div>
+                                <div class="bar-label">Fri</div>
+                            </div>
+                            <div class="activity-bar" style="--bar-height: 60%">
+                                <div class="bar-fill"></div>
+                                <div class="bar-label">Sat</div>
+                            </div>
+                            <div class="activity-bar" style="--bar-height: 40%">
+                                <div class="bar-fill"></div>
+                                <div class="bar-label">Sun</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Features -->
+                    <div class="privacy-features-card">
+                        <h4 class="features-title">🔐 Active Security Features</h4>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-check">✓</div>
+                                <div class="feature-text">End-to-End Encryption</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-check">✓</div>
+                                <div class="feature-text">Wallet Authentication</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-check">✓</div>
+                                <div class="feature-text">Self-Destruct Messages</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-check">✓</div>
+                                <div class="feature-text">Zero-Knowledge Proof</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Sidebar Toggle Button -->
+        <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" style="display: none;">💬</button>
+
+        <!-- Mobile Overlay -->
+        <div class="mobile-overlay" id="mobileOverlay"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

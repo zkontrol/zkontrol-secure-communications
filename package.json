@@ -1,0 +1,47 @@
+{
+  "name": "zkontrol-secure-communications",
+  "version": "2.1.0",
+  "description": "ZKONTROL - Privacy-focused secure communications platform with Phantom wallet authentication, self-destructing messages, real-time messaging, and AI-powered crypto assistant",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zkontrol",
+    "secure-chat",
+    "privacy",
+    "self-destructing-messages",
+    "solana",
+    "phantom-wallet",
+    "web3",
+    "cryptocurrency",
+    "real-time-messaging",
+    "websocket",
+    "ai-assistant"
+  ],
+  "author": "ZKONTROL <dev@zkontrol.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zkontrol/zkontrol-secure-communications"
+  },
+  "homepage": "https://zkontrol.io",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "@solana/web3.js": "^1.98.4",
+    "bcrypt": "^6.0.0",
+    "drizzle-kit": "^0.31.7",
+    "drizzle-orm": "^0.44.7",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "openai": "^6.9.1",
+    "socket.io": "^4.8.1",
+    "tweetnacl": "^1.0.3",
+    "ws": "^8.18.3"
+  }
+}

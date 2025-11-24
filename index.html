@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+<html data-wf-page="678d1cd10cf7d7c32908a646" data-wf-site="678d1cd10cf7d7c32908a64a">
+
+<head>
+    <meta charset="utf-8" />
+    <title> ZKONTROL</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/Symbol-purple.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/Symbol-purple.png">
+    <link rel="shortcut icon" href="assets/logos/Symbol-purple.png" type="image/x-icon">
+
+    <!-- Defer non-critical scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-copyclip@1/copyclip.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@flowbase-co/boosters-gsap-text-hover@1.0.3/dist/gsap-text-hover.min.js"
+        type="text/javascript" integrity="sha384-GU/xG877Y20iulDjD/GU+9IAXMnzF3yTVYNNf9osFqkMZLR8Be3CdZo/ZLPC1/7g"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@flowbase-co/boosters-gsap@3.12.5/dist/gsap.min.js" type="text/javascript"
+        integrity="sha384-wEXGZz/kZZx0OXjDxeqER6wOui/oDywrfFwJK4wt230jPbDbtiPkm3C7vRJOcJrf"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <div class="global-styles w-embed">
+            <style>
+                body {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    font-smoothing: antialiased;
+                    text-rendering: optimizeLegibility;
+                }
+
+                /* Focus state style for keyboard navigation for the focusable elements */
+
+                *[tabindex]:focus-visible,
+                input[type="file"]:focus-visible {
+                    outline: 0.125rem solid #4d65ff;
+                    outline-offset: 0.125rem;
+                }
+
+                /* Set color style to inherit */
+
+                .inherit-color * {
+                    color: inherit;
+                }
+
+                /* Get rid of top margin on first element in any rich text element */
+
+                .w-richtext> :not(div):first-child,
+                .w-richtext>div:first-child> :first-child {
+                    margin-top: 0 !important;
+                }
+
+                /* Get rid of bottom margin on last element in any rich text element */
+
+                .w-richtext>:last-child,
+                .w-richtext ol li:last-child,
+                .w-richtext ul li:last-child {
+                    margin-bottom: 0 !important;
+                }
+
+                /* Make sure containers never lose their center alignment */
+
+                .container-medium,
+                .container-small,
+                .container-large {
+                    margin-right: auto !important;
+                    margin-left: auto !important;
+                }
+
+          .text-style-3lines {
+                    display: -webkit-box;
+                    overflow: hidden;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                }
+
+                .text-style-2lines {
+                    display: -webkit-box;
+                    overflow: hidden;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
+
+                
+                .hide {
+                    display: none !important;
+                }
+
+                @media screen and (max-width: 991px) {
+
+                    .hide,
+                    .hide-tablet {
+                        display: none !important;
+                    }
+                }
+
+                @media screen and (max-width: 767px) {
+                    .hide-mobile-landscape {
+                        display: none !important;
+                    }
+                }
+
+                @media screen and (max-width: 479px) {
+                    .hide-mobile {
+                        display: none !important;
+                    }
+                }
+
+                .margin-0 {
+                    margin: 0rem !important;
+                }
+
+                .padding-0 {
+                    padding: 0rem !important;
+                }
+
+                .spacing-clean {
+                    padding: 0rem !important;
+                    margin: 0rem !important;
+                }
+
+                .margin-top {
+                    margin-right: 0rem !important;
+                    margin-bottom: 0rem !important;
+                    margin-left: 0rem !important;
+                }
+
+                .padding-top {
+                    padding-right: 0rem !important;
+                    padding-bottom: 0rem !important;
+                    padding-left: 0rem !important;
+                }
+
+                .margin-right {
+                    margin-top: 0rem !important;
+                    margin-bottom: 0rem !important;
+                    margin-left: 0rem !important;
+                }
+
+                .padding-right {
+                    padding-top: 0rem !important;
+                    padding-bottom: 0rem !important;
+                    padding-left: 0rem !important;
+                }
+
+                .margin-bottom {
+                    margin-top: 0rem !important;
+                    margin-right: 0rem !important;
+                    margin-left: 0rem !important;
+                }
+
+                .padding-bottom {
+                    padding-top: 0rem !important;
+                    padding-right: 0rem !important;
+                    padding-left: 0rem !important;
+                }
+
+                .margin-left {
+                    margin-top: 0rem !important;
+                    margin-right: 0rem !important;
+                    margin-bottom: 0rem !important;
+                }
+
+                .padding-left {
+                    padding-top: 0rem !important;
+                    padding-right: 0rem !important;
+                    padding-bottom: 0rem !important;
+                }
+
+                .margin-horizontal {
+                    margin-top: 0rem !important;
+                    margin-bottom: 0rem !important;
+                }
+
+                .padding-horizontal {
+                    padding-top: 0rem !important;
+                    padding-bottom: 0rem !important;
+                }
+
+                .margin-vertical {
+                    margin-right: 0rem !important;
+                    margin-left: 0rem !important;
+                }
+
+                .padding-vertical {
+                    padding-right: 0rem !important;
+                    padding-left: 0rem !important;
+                }
+            </style>
+        </div>
+        <main class="main-wrapper">
+            <div class="section_nav">
+                <div class="padding-global">
+                    <div class="padding-vertical padding-nav">
+                        <div data-w-id="7981a21f-9113-a5f3-ddbf-313d02c9f253" style="opacity:0" class="nav_layout">
+                            <div class="nav_item left"><a fb-text-hover-speed="1.4" fb-text-hover="true"
+                                    fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5" href="#about"
+                                    class="nav_link">01 about</a><a fb-text-hover-speed="1.4" fb-text-hover="true"
+                                    fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5" href="#features"
+                                    class="nav_link">02 features</a></div><a
+                                data-w-id="2a2c2de6-3e8f-99fa-40b3-25de981d9d98" href="/" aria-current="page"
+                                class="macro_logo w-inline-block w--current" style="transform: scale(1.3);">
+                                <img src="logo.png" loading="lazy" style="" alt="" class="" />
+
+                            </a>
+
+                            <div class="nav_item right">
+                                    <a fb-text-hover-speed="1.4" fb-text-hover="true"
+                                    fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5" href="#model"
+                                    class="nav_link">03 Model</a>
+                                    <a fb-text-hover-speed="1.4" fb-text-hover="true"
+                                    fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5" href="/app/"
+                                    class="nav_link">04 App</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .section_hero {
+                    position: relative;
+                    width: 100%;
+                    height: 100vh;
+                    overflow: hidden;
+                }
+
+                .hero-video {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transform: translate(-50%, -50%);
+                    z-index: 0;
+                }
+
+                .section_hero::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0, 0, 0, 0.4);
+                    z-index: 1;
+                }
+
+                .hero-padding-global,
+                .hero-padding-vertical,
+                .hero-container-large {
+                    position: relative;
+                    z-index: 2;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    height: 100%;
+                }
+            </style>
+            <div class="section_hero">
+                <video autoplay muted loop playsinline class="hero-video" preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect fill='%230a0a0f' width='1920' height='1080'/%3E%3C/svg%3E">
+                    <source src="/newlogo.mp4" type="video/mp4" />
+
+                </video>
+
+                <div class="hero-padding-global">
+                    <div class="hero-padding-vertical padding-hero">
+                        <div class="hero-container-large">
+                            <div class="hero-heading-wrapper">
+                                <h1 letters-slide-up="" text-split=""
+                                    class="heading-style-h1 text-align-center text-white">
+                                    Welcome to the <br> ZKONTROL
+                                </h1>
+                                <div class="hero-paragraph">
+                                <div words-slide-up="" text-split="" class="text-size-large hero-text" >
+                                    A comprehensive secure communications platform designed with privacy, security, and
+                                    usability as its core principles.
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="hero-form-wrapper">
+
+                                <div class="form-block w-form" style="display: flex; justify-content: center;">
+                                    <a href="/app/" class="button is-form-submit w-button">
+                                        Launch App
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="about" class="section_about">
+                <div class="padding-global">
+                    <div class="padding-vertical padding_about">
+                        <div class="container-large">
+                            <div class="flex-vertical max-width-xlarge align-center">
+
+                                <h2 words-slide-up="" text-split="" class="heading-medium text-align-center">About</h2>
+
+                                <div class="spacer-large"></div>
+                                <div class="text-align-center">
+                                    <div words-slide-up="" text-split="" class="text-size-large">
+                                       In today's digital landscape, the right to private communication faces unprecedented challenges. Government surveillance, corporate data harvesting, and cybercriminal activities have eroded trust in traditional communication platforms. ZKONTROL was developed as a response to these challenges, offering a solution that prioritizes user privacy without compromising functionality or ease of use.
+
+ZKONTROL began as a simple web-based encrypted chat platform but has
+ evolved into a comprehensive communications ecosystem that includes messaging, voice calls, 
+ file storage, AI assistance, and developer tools—all built on a foundation of uncompromising privacy and security.
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="F" class="section_how_it_works">
+                <div class="padding-global">
+                    <div class="padding-vertical padding-huge">
+                        <div class="container-large">
+                            <div class="margin-bottom margin-medium">
+                                <div class="gradient-border" id="features">
+                                    <div class="hiw_heading-wrapper"><img
+                                            src="/search-icon.png"
+                                            loading="lazy" alt="" class="hiw_icon" />
+                                        <h2 class="text-size-regular text-style-allcaps">Features</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-w-id="83cb2329-30ef-e6cc-e7f1-5ab962f1706e" class="hiw_layout">
+                                <div data-w-id="6bc1878a-2f21-d0b3-27fc-7ca2ea030f78"
+                                    style="-webkit-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    class="hiw_item _1">
+                                    <div class="align_right"><img
+                                            src="/client.png"
+                                            loading="lazy" alt="" class="hiw_image" /></div>
+                                    <div class="hiw_text-wrapper">
+                                        <div class="margin-bottom margin-regular">
+                                            <h3 words-slide-up="" text-split="" class="subhead">Client-Side Focus</h3>
+                                        </div>
+                                        <p words-slide-up="" text-split="" class="text-size-large text-ch-28">
+                                            The majority of cryptographic operations occur on the client side (in the user's browser or app), ensuring that sensitive data never leaves the user's device in an unencrypted form.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div data-w-id="d3713f86-b726-696b-14d4-49310afb657b"
+                                    style="-webkit-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    class="hiw_item _2">
+                                    <div class="align_right"><img
+                                            src="/server.png"
+                                            loading="lazy" alt="" class="hiw_image" /></div>
+                                    <div class="hiw_text-wrapper">
+                                        <div class="margin-bottom margin-regular">
+                                            <h3 words-slide-up="" text-split="" class="subhead">Zero-Knowledge Server Infrastructure</h3>
+                                        </div>
+                                        <p words-slide-up="" text-split="" class="text-size-large text-ch-28">
+                                            Our servers are designed with a zero-knowledge principle—they facilitate communication 
+                                            between users without being able to access the content of those communications.</p>
+                                    </div>
+                                </div>
+                                <div data-w-id="fbd62af1-0b33-5bbe-8137-86e7f6ebad52"
+                                    style="-webkit-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    class="hiw_item _3">
+                                    <div class="align_right"><img
+                                            src="/data.png"
+                                            loading="lazy" alt="" class="hiw_image" /></div>
+                                    <div class="hiw_text-wrapper">
+                                        <div class="margin-bottom margin-regular">
+                                            <h3 words-slide-up="" text-split="" class="subhead">Ephemeral Data Handling</h3>
+                                        </div>
+                                        <p words-slide-up="" text-split="" class="text-size-large text-ch-28">
+                                         All communications are ephemeral by default. Chat rooms automatically destroy themselves after
+                                          periods of inactivity, and no logs or message histories are maintained on our servers.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section_vpn" id="model">
+                <div class="lottie" data-w-id="3640ae1f-34eb-05fe-fb0f-2e5467ff3b27" data-animation-type="lottie"
+                    data-src="https://cdn.prod.website-files.com/678d1cd10cf7d7c32908a64a/678f9130de9ae8d4395f0bc9_EjvxXRx4HJ.json"
+                    data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg"
+                    data-default-duration="0" data-duration="5"></div>
+                <div class="padding-global relative">
+                    <div class="padding-vertical padding-xhuge">
+                        <div class="container-large">
+                            <div class="flex-vertical max-width-medium align-center">
+                                <div class="spacer-medium">
+                                    <h2 words-slide-up="" text-split="" class="heading-style-h2 text-align-center">
+                                       Security Model & Encryption Protocols</h2>
+                                </div>
+                                <div words-slide-up="" text-split="" class="text-size-regular text-align-center">
+                                  ZKONTROL's security model is built on multiple layers of protection:</div>
+                            </div>
+                            <div class="benefit_component">
+                                <div class="benefit-item">
+                                    <div class="flex-horizontal why_macro-top"><img
+                                            src="/endtoend.png"
+                                            loading="lazy" alt="" class="why-macro_icon" />
+                                        <h2 words-slide-up="" text-split="" class="subhead">End-to-End Encryption</h2>
+                                    </div>
+                                    <p words-slide-up="" text-split="" class="text-size-regular">
+                                        All messages are encrypted using AES-256 encryption with keys that never leave the client device.
+                                         The encryption process happens before any data is transmitted over the network.
+                                    </p>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="flex-horizontal why_macro-top"><img
+                                            src="/forward.png"
+                                            loading="lazy" alt="" class="why-macro_icon" />
+                                        <h2 words-slide-up="" text-split="" class="subhead">Perfect Forward Secrecy.</h2>
+                                    </div>
+                                    <p words-slide-up="" text-split="" class="text-size-regular">ZKONTROL implements perfect forward secrecy through dynamic session keys that change frequently, ensuring that even if one 
+                                        conversation is compromised, past and future conversations remain secure..</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="flex-horizontal why_macro-top"><img
+                                            src="/password.png"
+                                            loading="lazy" alt="" class="why-macro_icon" />
+                                        <h2 words-slide-up="" text-split="" class="subhead">Password-Based Room Security</h2>
+                                    </div>
+                                    <p words-slide-up="" text-split="" class="text-size-regular">Chat rooms are secured with password-based encryption, where the room password is used as part of the key derivation function (PBKDF2) to generate strong encryption keys.</p>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="flex-horizontal why_macro-top"><img
+                                            src="no-auth.png"
+                                            loading="lazy" alt="" class="why-macro_icon" />
+                                        <h2 words-slide-up="" text-split="" class="subhead">No Authentication Trail</h2>
+                                    </div>
+                                    <p words-slide-up="" text-split="" class="text-size-regular">The platform requires no user registration or accounts, eliminating identity-linked authentication that could be used to track users.
+
+</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="F" class="section_how_it_works">
+                <div data-w-id="495ec82a-6d20-8880-086c-a479efe27345"
+                                        style="-webkit-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                        class="tab-link w-inline-block w-tab-link w--current">
+                                        <div>One</div>
+                                    </a>
+                                    <a data-w-tab="Tab 2" data-w-id="495ec82a-6d20-8880-086c-a479efe27348"
+                                        style="-webkit-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                        class="tab-link w-inline-block w-tab-link">
+                                        <div>Two</div>
+                                    </a>
+                                    <!-- <a data-w-tab="Tab 3" data-w-id="495ec82a-6d20-8880-086c-a479efe2734b" style="-webkit-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                class="tab-link w-inline-block w-tab-link">
+                                <div>macro vs brave</div>
+                            </a>
+                            <a data-w-tab="Tab 4" data-w-id="794eeca1-b357-7b03-6d06-67766c59985d" style="-webkit-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                class="tab-link w-inline-block w-tab-link">
+                                <div>macro vs opera</div>
+                            </a> -->
+                                </div>
+                                <div style="-webkit-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 1rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    class="tabs-content w-tab-content">
+                                    <div data-w-tab="Tab 1" class="tab-pane w-tab-pane w--tab-active">
+                                        <div class="tab-pane-wrapper">
+                                            <div class="roadmap-table">
+                                                <div id="w-node-_2e509ff4-0609-c312-cd4d-4c8b7b960c9a-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-_2e509ff4-0609-c312-cd4d-4c8b7b960cab-2908a646"
+                                                        class="y-item right"></div>
+                                                    <h3 class="heading-style-h4">Journalism & Activism</h3>
+                                                    <h3 class="heading-style-h4">Business & Enterprise</h3>
+                                                </div>
+                                                <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efac6-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efac7-2908a646"
+                                                        class="y-item right">
+                                                        <div class="subhead small">-</div>
+                                                    </div>
+                                                    <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efacc-2908a646"
+                                                        class="text-size-regular mobile-small">
+                                                                
+                                                        Secure communications for journalists and sources
+                                                    </div>
+                                                    <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efaca-2908a646"
+                                                        class="text-size-regular mobile-small">
+Confidential corporate communications
+
+
+                                                    </div>
+                                                </div>
+                                                <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac3561271d-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac3561271e-2908a646"
+                                                        class="y-item right">
+                                                        <div class="subhead small">-</div>
+                                                    </div>
+                                                    <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac35612721-2908a646"
+                                                        class="text-size-regular mobile-small">Protected collaboration on sensitive investigations</div>
+                                                    <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac35612723-2908a646"
+                                                        class="text-size-regular mobile-small">Secure contract negotiations</div>
+                                                </div>
+                                              
+                                                <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6bfe-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6bff-2908a646"
+                                                        class="y-item right">
+                                                        <div class="subhead small">-</div>
+                                                    </div>
+                                                    <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6c02-2908a646"
+                                                        class="text-size-regular mobile-small">
+Safe document exchange in high-risk environments</div>
+                                                    <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6c04-2908a646"
+                                                        class="text-size-regular mobile-small">
+Protection of intellectual property.</div>
+                                                </div>
+                                                <div id="w-node-_28523e3c-b6e9-7ae7-270f-13709018d381-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-_28523e3c-b6e9-7ae7-270f-13709018d382-2908a646"
+                                                        class="y-item right">
+                                                        <div class="subhead small">-</div>
+                                                    </div>
+                                                    <div id="w-node-_28523e3c-b6e9-7ae7-270f-13709018d385-2908a646"
+                                                        class="text-size-regular mobile-small"><strong></strong>
+                                                        </div>
+                                                    <div id="w-node-_28523e3c-b6e9-7ae7-270f-13709018d387-2908a646"
+                                                        class="text-size-regular mobile-small">Compliance with data protection regulations</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-w-tab="Tab 2" class="tab-pane w-tab-pane">
+                                        <div class="tab-pane-wrapper">
+                                            <div class="roadmap-table">
+                                                <div id="w-node-_2e509ff4-0609-c312-cd4d-4c8b7b960c9a-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-_2e509ff4-0609-c312-cd4d-4c8b7b960cab-2908a646"
+                                                        class="y-item right"></div>
+                                                    <h3 class="heading-style-h4">Personal Privacy</h3>
+                                                    <h3 class="heading-style-h4">Healthcare & Legal Services</h3>
+                                                </div>
+                                                <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efac6-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efac7-2908a646"
+                                                        class="y-item right">
+                                                        <div class="subhead small">-</div>
+                                                    </div>
+                                                    <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efacc-2908a646"
+                                                        class="text-size-regular mobile-small">
+Private communications for ordinary citizens
+                                                    </div>
+                                                    <div id="w-node-fd4ca655-a46d-6e53-47cf-3923f42efaca-2908a646"
+                                                        class="text-size-regular mobile-small">HIPAA-compliant patient communications
+                                                    </div>
+                                                </div>
+                                                <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac3561271d-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac3561271e-2908a646"
+                                                        class="y-item right">
+                                                        <div class="subhead small">-</div>
+                                                    </div>
+                                                    <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac35612721-2908a646"
+                                                        class="text-size-regular mobile-small">Protection from data harvesting and profiling</div>
+                                                    <div id="w-node-_7f467b30-b194-0b3c-ade0-6dac35612723-2908a646"
+                                                        class="text-size-regular mobile-small">
+Attorney-client privileged conversations</div>
+                                                </div>
+                                               
+                                                <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6bfe-2908a646"
+                                                    class="table-row">
+                                                    <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6bff-2908a646"
+                                                        class="y-item right">
+                                                        <div class="subhead small">-</div>
+                                                    </div>
+                                                    <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6c02-2908a646"
+                                                        class="text-size-regular mobile-small">Security against identity theft and personal data breaches</div>
+                                                    <div id="w-node-e97c05a1-4729-344f-a794-f99f6adc6c04-2908a646"
+                                                        class="text-size-regular mobile-small">Secure document sharing for sensitive cases</div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="F" class="section_how_it_works">
+                <div class="padding-global">
+                    <div class="padding-vertical padding-huge">
+                        <div class="container-large">
+                            <div class="margin-bottom margin-medium">
+                                <div class="gradient-border">
+                                    <div class="hiw_heading-wrapper"><img
+                                            src="/search-icon.png"
+                                            loading="lazy" alt="" class="hiw_icon" />
+                                        <h2 class="text-size-regular text-style-allcaps">Tokenomics</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-w-id="83cb2329-30ef-e6cc-e7f1-5ab962f1706e" class="hiw_layout">
+                                <div data-w-id="6bc1878a-2f21-d0b3-27fc-7ca2ea030f78"
+                                    style="-webkit-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    class="hiw_item _1">
+                                    <div class="align_right"><img
+                                            src="/briefcase.png"
+                                            loading="lazy" alt="" class="hiw_image" /></div>
+                                    <div class="hiw_text-wrapper">
+                                        <div class="margin-bottom margin-regular">
+                                            <h3 words-slide-up="" text-split="" class="subhead"
+                                                style="font-size: 35px;">Total Supply</h3>
+                                        </div>
+                                        <p words-slide-up="" text-split="" style="font-size: 25px;"
+                                            class="text-size-large text-ch-28">1B</p>
+                                    </div>
+                                </div>
+                                <div data-w-id="d3713f86-b726-696b-14d4-49310afb657b"
+                                    style="-webkit-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    class="hiw_item _2">
+                                    <div class="align_right"><img
+                                            src="/ticker.png"
+                                            loading="lazy" alt="" class="hiw_image" /></div>
+                                    <div class="hiw_text-wrapper">
+                                        <div class="margin-bottom margin-regular">
+                                            <h3 words-slide-up="" text-split="" style="font-size: 35px;"
+                                                class="subhead">Ticker</h3>
+                                        </div>
+                                        <p words-slide-up="" text-split="" style="font-size: 25px;"
+                                            class="text-size-large text-ch-28">$KNTRL</p>
+                                    </div>
+                                </div>
+                                <div data-w-id="fbd62af1-0b33-5bbe-8137-86e7f6ebad52"
+                                    style="-webkit-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 2rem, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    class="hiw_item _3">
+                                    <div class="align_right"><img
+                                            src="/chain.png"
+                                            loading="lazy" alt="" class="hiw_image" /></div>
+                                    <div class="hiw_text-wrapper">
+                                        <div class="margin-bottom margin-regular">
+                                            <h3 words-slide-up="" text-split="" style="font-size: 35px;"
+                                                class="subhead">Blockchain</h3>
+                                        </div>
+                                        <p words-slide-up="" text-split="" style="font-size: 25px;"
+                                            class="text-size-large text-ch-28">SOLANA (SOL)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="token" class="section_token">
+                <div class="padding-global">
+                    <div class="container-large">
+                        <div class="token_component">
+                            <div class="container-large">
+                                <div class="token_layout">
+                                    <h2 class="subhead smaller">$KNTRL</h2>
+                                    <div fs-copyclip-element="click" class="contract_address-wrapper" id="contractWrapper" style="cursor: pointer;">
+                                        <div class="contract_text" id="contractAddress">9VVAWXPkQjStAz1UMqdjhpd15sVHr4NxVypuWUPcpump</div>
+                                        <span id="copiedMsg" style="display: none; color: #8b5cf6; margin-left: 12px; font-size: 14px; font-weight: 600;">✓ Copied!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-w-id="ce4a6e7f-9d14-dee9-0b8a-7686b795ccdb" class="section_footer">
+                <div class="padding-global">
+                    <div class="padding-vertical padding-xxlarge">
+                        <div class="container-large">
+                            <div class="footer_top-layout">
+                                <div class="max-width-full">
+                                    <div class="max-width-medium">
+                                        <h2 words-slide-up="" text-split="" class="heading-medium">a comprehensive secure communications 
+                                            platform designed with privacy, security, and usability as its core principles. 
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="footer_links-wrapper">
+                                    <div data-w-id="bae0cade-54be-1680-b52f-a7cfc4014aed"
+                                        class="margin-bottom margin-small text-align-right"><a fb-text-hover-speed="1.4"
+                                            fb-text-hover="true" fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5"
+                                            href="#about" class="footer_link">about</a></div>
+                                    <div data-w-id="e5f7b6c2-75e7-d1f7-130f-46f4199169f7"
+                                        class="margin-bottom margin-small text-align-right"><a fb-text-hover-speed="1.4"
+                                            fb-text-hover="true" fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5"
+                                            href="#features" class="footer_link">features</a></div>
+                                    <div data-w-id="9ee618a2-ce7b-5473-b880-acf72010a73e"
+                                        class="margin-bottom margin-small text-align-right"><a fb-text-hover-speed="1.4"
+                                            fb-text-hover="true" fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5"
+                                            href="#why" class="footer_link">Use Case</a></div>
+
+                                    <div data-w-id="f28121cf-ea64-1069-0350-76f052e42a40"
+                                        class="margin-bottom margin-small text-align-right"><a fb-text-hover-speed="1.4"
+                                            fb-text-hover="true" fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5"
+                                            href="#faqs" class="footer_link">faqs</a></div>
+                                            
+                                             <div data-w-id="9ee618a2-ce7b-5473-b880-acf72010a73e"
+                                        class="margin-bottom margin-small text-align-right"><a fb-text-hover-speed="1.4"
+                                            fb-text-hover="true" fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5"
+                                            href="#why" class="footer_link">Docs</a></div>
+
+                                             <div data-w-id="9ee618a2-ce7b-5473-b880-acf72010a73e"
+                                        class="margin-bottom margin-small text-align-right"><a fb-text-hover-speed="1.4"
+                                            fb-text-hover="true" fb-text-hover-type="4" fb-text-hover-colors="#A5A5A5"
+                                            href="#why" class="footer_link">App</a></div>
+
+                                </div>
+                                <img src="/logo.png" loading="lazy" style="width: 40px;" alt="" class="footer_image" />
+                            </div>
+                            <div style="opacity:0" class="footer-bottom-layout">
+                                
+                                <div class="footer_links-wrapper social-media">
+                                    <a href="https://x.com/zkontrol_io?s=21" target="_blank"
+                                        class="social_media-wrapper w-inline-block" title="Follow us on X">
+                                        <img src="/twitter-x.png" style="width: 20px;"
+                                            loading="lazy" alt="X/Twitter" class="social_media-icon" /></a>
+                                    <button class="social_media-wrapper w-inline-block" style="background: none; border: none; cursor: not-allowed; opacity: 0.5;" title="Documentation coming soon">
+                                        <img src="/docs.png" style="width: 20px;"
+                                            loading="lazy" alt="Docs" class="social_media-icon" /></button>
+                                    <button class="social_media-wrapper w-inline-block" style="background: none; border: none; cursor: not-allowed; opacity: 0.5;" title="Telegram coming soon">
+                                        <img src="/telegram.png" style="width: 20px;"
+                                            loading="lazy" alt="Telegram" class="social_media-icon" /></button>
+                                </div>
+
+                                <div class="footer_embed-wrapper">
+                                    <div class="footer_cc-text">Copyright ZKONTROL 2025</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=678d1cd10cf7d7c32908a64a"
+        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.prod.website-files.com/678d1cd10cf7d7c32908a64a/js/webflow.schunk.57d5559d2f0cd9f8.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/678d1cd10cf7d7c32908a64a/js/webflow.schunk.d92506ca31b5a78c.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/678d1cd10cf7d7c32908a64a/js/webflow.schunk.b4435221be879eb3.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/678d1cd10cf7d7c32908a64a/js/webflow.c684e465.a4e7886024bc6423.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/timothydesign/script/split-type.js"></script>
+    <!--Main GSAP libarary -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <!--Scramble text PLugin-->
+    <script
+        src="https://cdn.prod.website-files.com/677e638c7f0aaef072555d04/6783dbdfc02dcfe2ca54fc7a_ScrambleTextPlugin.min.js.txt"></script>
+    <!-- Scroll Trigger GSAP plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Contract address copy functionality
+            const contractWrapper = document.getElementById('contractWrapper');
+            const contractAddress = document.getElementById('contractAddress');
+            const copiedMsg = document.getElementById('copiedMsg');
+            
+            if (contractWrapper && contractAddress) {
+                contractWrapper.addEventListener('click', async () => {
+                    const contractText = contractAddress.textContent.trim();
+                    try {
+                        await navigator.clipboard.writeText(contractText);
+                        
+                        // Show "Copied!" message
+                        copiedMsg.style.display = 'inline';
+                        
+                        // Hide after 2 seconds
+                        setTimeout(() => {
+                            copiedMsg.style.display = 'none';
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy:', err);
+                    }
+                });
+            }
+            
+            // Register GSAP plugins
+            gsap.registerPlugin(ScrambleTextPlugin, ScrollTrigger);
+
+            // Split text into spans to enable individual animation of words and characters
+            let typeSplit = new SplitType("[text-split]", {
+                types: "words, chars",
+                tagName: "span"
+            });
+
+            // Animate the first 'words-slide-up' or 'text-split' element immediately on page load
+            const firstElements = document.querySelectorAll("[words-slide-up], [text-split]");
+            if (firstElements.length > 0) {
+                const firstElement = firstElements[0];
+                let tl = gsap.timeline();
+                tl.from(firstElement.querySelectorAll(".word, .char"), {
+                    opacity: 0,
+                    yPercent: 50,
+                    duration: 0.75,
+                    ease: "easeOutQuart",
+                    stagger: {
+                        amount: 0.5
+                    }
+                });
+            }
+
+            // Apply scroll-triggered animations to all other elements with 'text-split' or 'words-slide-up'
+            document.querySelectorAll("[words-slide-up], [text-split]").forEach((element, index) => {
+                if (index === 0) return; // Skip the first element
+
+                let tl = gsap.timeline({
+                    paused: true
+                });
+                tl.from(element.querySelectorAll(".word, .char"), {
+                    opacity: 0,
+                    yPercent: 50,
+                    duration: 0.75,
+                    ease: "easeOutQuart",
+                    stagger: {
+                        amount: 0.5
+                    }
+                });
+
+                // Attach ScrollTrigger
+                ScrollTrigger.create({
+                    trigger: element,
+                    start: "top 90%", // Start animation when the top is near the bottom of the viewport
+                    toggleActions: "play none none none", // Play animation once
+                    onEnter: () => tl.play(),
+                    markers: false // Set to true for debugging during development
+                });
+            });
+
+            // Animate elements with 'letters-slide-up' attribute based on scroll position
+            $("[letters-slide-up]").each(function () {
+                let tl = gsap.timeline({
+                    paused: true
+                });
+                tl.from($(this).find(".char"), {
+                    yPercent: 50,
+                    opacity: 0,
+                    duration: 0.75,
+                    ease: "easeOutQuart",
+                    stagger: {
+                        amount: 0.5
+                    }
+                });
+                ScrollTrigger.create({
+                    trigger: $(this)[0], // Use native DOM element
+                    start: "top 90%", // Trigger animation 10% higher in the viewport
+                    toggleActions: "play none none none"
+                });
+            });
+
+            // Animate elements with 'scrambletext' attribute
+            const scrambleTextElements = document.querySelectorAll(".scrambletext");
+            scrambleTextElements.forEach((element) => {
+                gsap.to(element, {
+                    duration: 1,
+                    scrambleText: {
+                        text: element.textContent, // Use the original text content
+                        chars: "+?84564XERSHKZN", // Characters used for scrambling
+                        speed: 1 // Speed of scrambling
+                    },
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 90%", // Adjust this as needed
+                        toggleActions: "play none none none", // Play only once
+                        once: true // Ensure it doesn't re-trigger
+                    }
+                });
+            });
+
+            // Prevent flash of unstyled content
+            gsap.set("[text-split], [words-slide-up]", {
+                opacity: 1
+            });
+        });
+        
+        // Defer video loading for better initial page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroVideo = document.querySelector('.hero-video');
+            if (heroVideo) {
+                // Start loading video after a short delay
+                setTimeout(() => {
+                    heroVideo.load();
+                }, 500);
+            }
+        });
+    </script>
+</body>
+
+</html>

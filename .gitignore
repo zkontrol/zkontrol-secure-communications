@@ -1,0 +1,85 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+.env.production
+.env.production.local
+config.local.json
+
+# Build outputs
+dist/
+build/
+*.bundle.js
+out/
+
+# Logs
+logs/
+*.log
+lerna-debug.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Platform-specific development files
+.[rR][eE][pP][lL][iI][tT]
+.[rR][eE][pP][lL][iI][tT].toml
+[rR][eE][pP][lL][iI][tT].md
+.cache/
+.local/
+.upm/
+.config/
+
+# Database
+.neon
+neon.json
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+
+# Node & Package managers
+.node_gyp/
+.npm/
+.yarn/
+.pnp.*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Documentation build
+docs/_build/
